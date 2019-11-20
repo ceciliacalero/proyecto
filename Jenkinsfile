@@ -4,7 +4,6 @@
         agent {
           kubernetes {
             label 'pipeline-as-code'
-            defaultContainer 'jnlp'
             yaml """
               apiVersion: v1
               kind: Pod
@@ -13,8 +12,6 @@
                   app: jenkins
               spec:
                 containers:
-                   - name: jnlp
-                     image: jenkins/jnlp-slave:3.35-5
                    - name: maven
                      image: maven:3.6.2-jdk-14
                      command:
@@ -79,9 +76,6 @@
             }
           }
           stage('Maven Build') {
-            when {
-              environment name: 'build', value: 'true'
-            }
             steps {
               container('maven') {
                   sh """
@@ -94,9 +88,6 @@
           stage('Code Analysis') {
             parallel {
               stage ('Maven Test') {
-                when {
-                  environment name: 'unit', value: 'true'
-                }
                 steps {
                   container('maven') {
                    sh '''
@@ -109,9 +100,6 @@
             }
           }
           stage('Create Docker Image') {
-            when {
-              environment name: 'docker', value: 'true'
-            }
             steps {
               container('docker') {
                 /*dockerImageCreate(dockerfile: "${dockerfile}", imageName: "${imageName}", \
@@ -132,9 +120,6 @@
             }
           }
           stage('Deploy to Kubernetes') {
-            when {
-              environment name: 'deploy', value: 'true'
-            }
             steps {
               container('helm') {
                   sh """
