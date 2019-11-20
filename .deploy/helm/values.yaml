@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: hub.docker.com/jmmix/private
+  repository: hub.docker.com/ceciliadominguez/private
   tag: master
   pullPolicy: IfNotPresent
 
