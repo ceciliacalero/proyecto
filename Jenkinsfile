@@ -47,8 +47,8 @@
           deploy   = "true"
           email    = "false"
 
-          gitBranch      = "${env.BRANCH_NAME}"
-          gitCommit      = "${env.GIT_COMMIT}"
+          gitBranch      = "${BRANCH_NAME}"
+          gitCommit      = "${GIT_COMMIT}"
           shortGitCommit = "${gitCommit[0..10]}"
           // this variable get the last tag on the branch
           //release      = sh(returnStdout: true, script: 'git tag | head -1').trim()
@@ -71,7 +71,7 @@
       stages {
           stage('Debug') {
             steps {
-                echo env.BRANCH_NAME
+                echo BRANCH_NAME
                 echo gitBranch
             }
           }
