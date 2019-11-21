@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: hub.docker.com/ceciliadominguez/private
+  repository: hub.docker.com/ceciliadominguez/app
   tag: master
   pullPolicy: IfNotPresent
 
