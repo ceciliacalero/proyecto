@@ -108,7 +108,7 @@
                   script{
                     docker.build("${imageName}", "-f ${dockerfile} $WORKSPACE")
                     sh """
-                      sed -i.bak -e "s/master/{BRANCH_NAME}/" "${dockerfile}"
+                      sed -i.bak -e "s/master/${gitBranch}/" "${dockerfile}"
                       pwd
                     """
                     docker.withRegistry("${registry}", "${credentialsId}") {
