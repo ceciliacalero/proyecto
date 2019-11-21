@@ -60,7 +60,7 @@
           // docker
           dockerfile    = ".deploy/Dockerfile"
           imageName     = "ceciliadominguez/app:${gitBranch}"
-          registry      = 'https://index.docker.io/v1/'
+          registry      = "ceciliadominguez/app:${gitBranch}"
           credentialsId = 'dockerhub'
 
           // k8s deploy
@@ -111,7 +111,7 @@
                       sed -i.bak -e "s/master/${gitBranch}/" "${dockerfile}"
                       pwd
                     """
-                    docker.withRegistry("${registry}", "${credentialsId}") {
+                    docker.withRegistry("", "${credentialsId}") {
                       app.push "${gitBranch}-${shortGitCommit}"
                       app.push "${gitBranch}"
                 }
