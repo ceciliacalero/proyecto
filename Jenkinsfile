@@ -106,7 +106,7 @@
                   registry: "${registry}", credentialsId: "${credentialsId}", gitBranch: "${gitBranch}", \
                   shortGitCommit: "${shortGitCommit}")*/
                   script{
-                    docker.build("${imageName}", "-f ${dockerfile} $WORKSPACE")
+                    def app = docker.build("${imageName}", "-f ${dockerfile} $WORKSPACE")
                     sh """
                       sed -i.bak -e "s/master/${gitBranch}/" "${dockerfile}"
                       pwd
