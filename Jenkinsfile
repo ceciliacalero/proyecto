@@ -60,7 +60,7 @@
           // docker
           dockerfile    = ".deploy/Dockerfile"
           imageName     = "ceciliadominguez/app:${gitBranch}"
-          registry      = 'registry.hub.docker.com'
+          registry      = 'https://index.docker.io'
           credentialsId = 'dockerhub'
 
           // k8s deploy
