@@ -47,7 +47,7 @@
           deploy   = "true"
           email    = "false"
 
-          gitBranch      = "${env.BRANCH_NAME}"
+          gitBranch      = ${BRANCH_NAME}
           gitCommit      = "${GIT_COMMIT}"
           shortGitCommit = "${gitCommit[0..10]}"
           // this variable get the last tag on the branch
