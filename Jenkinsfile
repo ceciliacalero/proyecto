@@ -59,12 +59,12 @@
 
           // docker
           dockerfile    = ".deploy/Dockerfile"
-          imageName     = "ceciliadominguez/app:${BRANCH_NAME}"
+          imageName     = "ceciliadominguez/app:${gitBranch}"
           registry      = 'https://registry.hub.docker.com'
           credentialsId = 'dockerhub'
 
           // k8s deploy
-          appName        = "app-api-${BRANCH_NAME}"
+          appName        = "app-api-${gitBranch}"
           appChart       = ".deploy/helm"
           helmAppVersion = "1"
         }
@@ -112,7 +112,7 @@
                       pwd
                     """
                     docker.withRegistry("${registry}", "${credentialsId}") {
-                      app.push "${BRANCH_NAME}-${shortGitCommit}"
+                      app.push "${gitBranch}-${shortGitCommit}"
                       app.push "${gitBranch}"
                 }
                }    
@@ -123,7 +123,7 @@
             steps {
               container('helm') {
                   sh """
-                    sed -i -e "s/\\(tag:\\).*/\\1 ${BRANCH_NAME}/" ${appChart}/values.yaml
+                    sed -i -e "s/\\(tag:\\).*/\\1 ${gitBranch}/" ${appChart}/values.yaml
                     sed -i -e "s/\\(^appVersion:\\).*/\\1 ${helmAppVersion}/" ${appChart}/Chart.yaml
                     sed -i -e "s/\\(^name:\\).*/\\1 ${appName}/" ${appChart}/Chart.yaml
                     sed -i -e "s/\\(^version:\\).*/\\1 ${release}/" ${appChart}/Chart.yaml
