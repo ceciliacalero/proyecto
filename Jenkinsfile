@@ -59,7 +59,7 @@
 
           // docker
           dockerfile    = ".deploy/Dockerfile"
-          imageName     = "ceciliadominguez/private:${gitBranch}"
+          imageName     = "ceciliadominguez/app:${gitBranch}"
           registry      = 'https://registry.hub.docker.com'
           credentialsId = 'dockerhub'
 
