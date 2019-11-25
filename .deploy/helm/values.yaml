@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: hub.docker.com/ceciliadominguez/app
+  repository: ceciliadominguez/app
   tag: master
   pullPolicy: IfNotPresent
 
@@ -19,7 +19,7 @@ service:
     type: LoadBalancer
     port: 80
     protocol: TCP
-    targetPort: 8080
+    targetPort: 8082
 
 ingress:
   enabled: false
