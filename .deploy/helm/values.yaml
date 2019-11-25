@@ -17,7 +17,7 @@ fullnameOverride: ""
 
 service:
     type: LoadBalancer
-    port: 8082
+    port: 80
     protocol: TCP
     targetPort: 8082
 
