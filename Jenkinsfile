@@ -1,7 +1,9 @@
-// <a.galvez.malpartida@accenture.com>
+// <c.dominguez.calero@accenture.com>
 
     pipeline {
-        agent {
+        agent {/*contenedor maven y docker, se usa docker in docker(De manera predeterminada, 
+               el complemento Docker Pipeline se comunicará con un demonio Docker local, 
+               al que normalmente se accede a través de /var/run/docker.sock.)*/
           kubernetes {
             label 'pipeline-as-code'
             yaml """
@@ -39,13 +41,7 @@
         }
 
         environment {
-          AUTHOR = 'Alberto'
-          // global
-          build    = "true"
-          unit     = "true"
-          docker   = "true"
-          deploy   = "true"
-          email    = "false"
+        
 
           gitBranch      = "${BRANCH_NAME}" //nombre de la rama
           gitCommit      = "${GIT_COMMIT}" //devulve commit realizados
@@ -67,17 +63,20 @@
           appName        = "app-api-${gitBranch}" //nombre de la app
           appChart       = ".deploy/helm"  //despliegue de helm
           helmAppVersion = "1"
+
+          //email
+          email          ="c.dominguez.calero@accenture.com"
         }
       stages {
           stage('Debug') {
             steps {
-                echo BRANCH_NAME
-                echo gitBranch
+                echo BRANCH_NAME //vis el nombre de la rama
+                echo gitBranch 
             }
           }
           stage('Maven Build') {
             steps {
-              container('maven') {
+              container('maven') { //construir la app
                   sh """
                     mvn compile
                     mvn -B -DskipTests clean package
@@ -119,7 +118,7 @@
               }
             }
           }
-          stage('Deploy to Kubernetes') {
+          stage('Deploy to Kubernetes') { //cambio automatico de las propiedades de la app
             steps {
               container('helm') {
                   sh """
@@ -138,7 +137,7 @@
             }
           }
         }
-       /* post {
+        post {
             success {
                 mail to: "${email}",
                 from: "jenkins@devsecopsascode.com",
@@ -151,5 +150,5 @@
                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                 body: "Something is wrong with ${env.BUILD_URL}"
             }
-        }*/
+        }
     }
