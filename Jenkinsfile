@@ -1,7 +1,7 @@
 // <c.dominguez.calero@accenture.com>
 
     pipeline {
-        agent {/*contenedor maven y docker, se usa docker in docker(De manera predeterminada, 
+        agent {/*Crea un pod de kubernetes con contenedor maven, docker y helm, se usa docker in docker(De manera predeterminada, 
                el complemento Docker Pipeline se comunicará con un demonio Docker local, 
                al que normalmente se accede a través de /var/run/docker.sock.)*/
           kubernetes {
@@ -63,20 +63,11 @@
           appName        = "app-api-${gitBranch}" //nombre de la app
           appChart       = ".deploy/helm"  //despliegue de helm
           helmAppVersion = "1"
-
-          //email
-          email          ="c.dominguez.calero@accenture.com"
         }
       stages {
-          stage('Debug') {
-            steps {
-                echo BRANCH_NAME //vis el nombre de la rama
-                echo gitBranch 
-            }
-          }
           stage('Maven Build') {
             steps {
-              container('maven') { //construir la app
+              container('maven') { //descargar las dependencias y construir la app 
                   sh """
                     mvn compile
                     mvn -B -DskipTests clean package
@@ -101,9 +92,6 @@
           stage('Create Docker Image') {
             steps {
               container('docker') {
-                /*dockerImageCreate(dockerfile: "${dockerfile}", imageName: "${imageName}", \
-                  registry: "${registry}", credentialsId: "${credentialsId}", gitBranch: "${gitBranch}", \
-                  shortGitCommit: "${shortGitCommit}")*/
                   script{
                     def app = docker.build("${imageName}", "-f ${dockerfile} $WORKSPACE") //construye la imagen
                     sh """
@@ -137,7 +125,7 @@
             }
           }
         }
-        post {
+       /* post {
             success {
                 mail to: "${email}",
                 from: "jenkins@devsecopsascode.com",
@@ -149,6 +137,6 @@
                 from: "jenkins@devsecopsascode.com",
                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                 body: "Something is wrong with ${env.BUILD_URL}"
-            }
+            }*/
         }
     }
