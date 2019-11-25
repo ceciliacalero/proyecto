@@ -9,8 +9,8 @@ image:
   tag: master
   pullPolicy: IfNotPresent
 
-#imagePullSecrets:
-#  name: k8s-gitlab-registry-api
+imagePullSecrets:
+  name: regcred
 
 nameOverride: ""
 fullnameOverride: ""

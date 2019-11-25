@@ -5,14 +5,14 @@
           kubernetes {
             label 'pipeline-as-code'
             yaml """
-              apiVersion: v1
-              kind: Pod
+              apiVersion: v1 
+              kind: Pod 
               metadata:
                 labels:
                   app: jenkins
               spec:
                 containers:
-                   - name: maven
+                   - name: maven 
                      image: maven:3.6.2-jdk-14
                      command:
                      - cat
@@ -32,7 +32,7 @@
                      tty: true
                 volumes:
                 - name: dockersock
-                  hostPath:
+                  hostPath: 
                     path: "/var/run/docker.sock"
             """
           }
@@ -47,25 +47,25 @@
           deploy   = "true"
           email    = "false"
 
-          gitBranch      = "${BRANCH_NAME}"
-          gitCommit      = "${GIT_COMMIT}"
+          gitBranch      = "${BRANCH_NAME}" //nombre de la rama
+          gitCommit      = "${GIT_COMMIT}" //devulve commit realizados
           shortGitCommit = "${gitCommit[0..10]}"
           // this variable get the last tag on the branch
           //release      = sh(returnStdout: true, script: 'git tag | head -1').trim()
-          release        = "0.0.1"
+          release        = "0.0.1" 
           /*
           * these variables must be configured
           */
 
           // docker
-          dockerfile    = ".deploy/Dockerfile"
-          imageName     = "ceciliadominguez/app:${gitBranch}"
-          registry      = "ceciliadominguez/app:${gitBranch}"
-          credentialsId = 'dockerhub'
+          dockerfile    = ".deploy/Dockerfile"  //despliega dockerfile
+          imageName     = "ceciliadominguez/app:${gitBranch}" //nombre de la imagen
+          registry      = "ceciliadominguez/app:${gitBranch}" //resgistro de dockerHub
+          credentialsId = 'dockerhub' //credenciales de dockerhub en jenkins
 
           // k8s deploy
-          appName        = "app-api-${gitBranch}"
-          appChart       = ".deploy/helm"
+          appName        = "app-api-${gitBranch}" //nombre de la app
+          appChart       = ".deploy/helm"  //despliegue de helm
           helmAppVersion = "1"
         }
       stages {
@@ -106,13 +106,13 @@
                   registry: "${registry}", credentialsId: "${credentialsId}", gitBranch: "${gitBranch}", \
                   shortGitCommit: "${shortGitCommit}")*/
                   script{
-                    def app = docker.build("${imageName}", "-f ${dockerfile} $WORKSPACE")
+                    def app = docker.build("${imageName}", "-f ${dockerfile} $WORKSPACE") //construye la imagen
                     sh """
-                      sed -i.bak -e "s/master/${gitBranch}/" "${dockerfile}"
+                      sed -i.bak -e "s/master/${gitBranch}/" "${dockerfile}" 
                       pwd
                     """
-                    docker.withRegistry("", "${credentialsId}") {
-                      app.push "${gitBranch}-${shortGitCommit}"
+                    docker.withRegistry("", "${credentialsId}") { //login dockerHub
+                      app.push "${gitBranch}-${shortGitCommit}" //subimos la imagen
                       app.push "${gitBranch}"
                 }
                }    
