@@ -95,7 +95,7 @@
                   script{
                     def app = docker.build("${imageName}", "-f ${dockerfile} $WORKSPACE") //construye la imagen
                     sh """
-                      sed -i.bak -e "s/master/${gitBranch}/" "${dockerfile}" 
+                      sed -i.bak -e "s/mydemo/${gitBranch}/" "${dockerfile}" 
                       pwd
                     """
                     docker.withRegistry("", "${credentialsId}") { //login dockerHub
@@ -106,7 +106,10 @@
               }
             }
           }
-          stage('Deploy to Kubernetes') { //cambio automatico de las propiedades de la app
+          stage('Deploy to Kubernetes') { // deliegue de la imagen
+          //1.cambio automatico de los valores de la app 
+          //2.cat leemos el archivo y descargamos
+          //3. creamos el pod
             steps {
               container('helm') {
                   sh """
@@ -114,7 +117,7 @@
                     sed -i -e "s/\\(^appVersion:\\).*/\\1 ${helmAppVersion}/" ${appChart}/Chart.yaml
                     sed -i -e "s/\\(^name:\\).*/\\1 ${appName}/" ${appChart}/Chart.yaml
                     sed -i -e "s/\\(^version:\\).*/\\1 ${release}/" ${appChart}/Chart.yaml
-                    cat ${appChart}/values.yaml
+                    cat ${appChart}/values.yaml 
                     cat ${appChart}/Chart.yaml
                     helm upgrade -i --recreate-pods ${appName} ${appChart}
                     helm list
