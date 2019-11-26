@@ -10,7 +10,10 @@ image:
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
-  name: regcred
+  name: regcred 
+  #kubectl create secret generic regcred --from-file=.dockerconfigjson=.docker/config.json --type=kubernetes.io/dockerconfigjson
+  #kubectl describe secret regcreds
+
 
 nameOverride: ""
 fullnameOverride: ""
