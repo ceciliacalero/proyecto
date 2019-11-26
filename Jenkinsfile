@@ -54,14 +54,14 @@
           */
 
           // docker
-          dockerfile    = ".deploy/Dockerfile"  //despliega dockerfile
+          dockerfile    = ".deploy/Dockerfile"  //ruta dockerfile
           imageName     = "ceciliadominguez/app:${gitBranch}" //nombre de la imagen
           registry      = "ceciliadominguez/app:${gitBranch}" //resgistro de dockerHub
           credentialsId = 'dockerhub' //credenciales de dockerhub en jenkins
 
           // k8s deploy
           appName        = "app-api-${gitBranch}" //nombre de la app
-          appChart       = ".deploy/helm"  //despliegue de helm
+          appChart       = ".deploy/helm"  //ruta de helm
           helmAppVersion = "1"
         }
       stages {
@@ -75,9 +75,9 @@
               }
             }
           }
-          stage('Code Analysis') {
+          stage('Code Analysis') {  
             parallel {
-              stage ('Maven Test') {
+              stage ('Maven Test') {//test unitarios
                 steps {
                   container('maven') {
                    sh '''
