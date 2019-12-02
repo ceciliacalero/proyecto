@@ -1,4 +1,4 @@
-# Proyecto FCT
+# Proyecto 
 
 En este proyecto se puede ver un ciclo completo CI/CD de una aplicacion simple de Java, con un pipeline de Jenkins.
 
@@ -43,7 +43,7 @@ _El despliegue se realiza automatico mediante la pipeline con Jenkins_
 
 ## Wiki 📖
 
-Puedes encontrar mucho más de cómo utilizar este proyecto en  [Wiki](https://github.com/ceciliacalero/docu-ProyectoFCT)
+Puedes encontrar mucho más de cómo utilizar este proyecto en  [Wiki](https://github.com/ceciliacalero/docu-proyecto)
 
 ## Versionado 📌
 
@@ -51,7 +51,7 @@ Usamos [Helm](https://helm.sh/) para el versionado.
 
 ## Autor ✒️
 
-* **Cecilia Domínguez Calero** - ** - [CeciliaCalero](/https://github.com/ceciliacalero)
+**Cecilia Domínguez Calero** - ** - [CeciliaCalero](/https://github.com/ceciliacalero)
 
 
 ## Expresiones de Gratitud 🎁
@@ -59,7 +59,6 @@ Usamos [Helm](https://helm.sh/) para el versionado.
 * Comenta a otros sobre este proyecto 📢
 * Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
 * Da las gracias públicamente 🤓.
-* etc.
 
 
 
