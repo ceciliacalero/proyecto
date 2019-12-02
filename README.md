@@ -51,7 +51,7 @@ Usamos [Helm](https://helm.sh/) para el versionado.
 
 ## Autor ✒️
 
-**Cecilia Domínguez Calero** - ** - [CeciliaCalero](/https://github.com/ceciliacalero)
+**Cecilia Domínguez Calero** - [CeciliaCalero](https://github.com/ceciliacalero)
 
 
 ## Expresiones de Gratitud 🎁
