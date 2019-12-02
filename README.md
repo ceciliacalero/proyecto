@@ -53,9 +53,6 @@ Usamos [Helm](https://helm.sh/) para el versionado.
 
 * **Cecilia Domínguez Calero** - ** - [CeciliaCalero](/https://github.com/ceciliacalero)
 
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
 
 ## Expresiones de Gratitud 🎁
 
