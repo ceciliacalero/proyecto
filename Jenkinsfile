@@ -106,8 +106,8 @@
               }
             }
           }
-          stage('Deploy to Kubernetes') { // deliegue de la imagen
-          //1.cambio automatico de los valores de la app 
+          stage('Deploy to Kubernetes') { // deliegue de la imagen   CD
+          //1.cambio automatico de los valores de la app (expresiones regulares)
           //2.cat leemos el archivo y descargamos
           //3. creamos el pod
             steps {
@@ -128,18 +128,4 @@
             }
           }
         }
-       /* post {
-            success {
-                mail to: "${email}",
-                from: "jenkins@devsecopsascode.com",
-                subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
-                body: "Successful build completed ${env.BUILD_URL}"
-            }
-            failure {
-                mail to: "${email}",
-                from: "jenkins@devsecopsascode.com",
-                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                body: "Something is wrong with ${env.BUILD_URL}"
-            }
-        }*/
     }
