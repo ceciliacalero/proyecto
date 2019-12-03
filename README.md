@@ -1,6 +1,6 @@
 # Proyecto DevOps
 
-En este proyecto se puede crea un ciclo completo CI/CD de una aplicacion simple de Java, con un pipeline en Jenkins.
+En este proyecto se crea un ciclo completo CI/CD de una aplicacion simple de Java, con un pipeline en Jenkins.
 
 ## Comenzando 🚀
 
