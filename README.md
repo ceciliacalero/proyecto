@@ -28,17 +28,16 @@ _Descargar Jenkins_
 helm install --name jenkins --set rbac.create=false --set master.adminUser=username --set master.adminPassword=password stable/jenkins
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
 ## Despliegue 📦
 
-_El despliegue se realiza automatico mediante la pipeline con Jenkins_
+_El despliegue se realiza automatico mediante la pipeline con Jenkins, se crea un pod en Kubernetes_
 
 ## Construido con 🛠️
 
 * [Spring Boot](https://spring.io/projects/spring-boot) - El framework web usado
 * [Maven](https://maven.apache.org/) - Manejador de dependencias y construcción de proyecto Java.
-* [Helm](https://helm.sh/) - Usado para despliegue y versionado
+* [Helm](https://helm.sh/) - Usado para despliegue 
 
 
 ## Wiki 📖
